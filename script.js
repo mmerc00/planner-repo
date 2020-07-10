@@ -48,7 +48,7 @@
 var currentDay = document.querySelector("currentDay");
 
 $(document).ready(function () {
-  console.log("ready!");
+  console.log("ready");
 });
 // TO GET THE CURRENT DATE - find a way to display the day of the week
 //found online
@@ -207,7 +207,7 @@ $(".time-block").each(function () {
 
 //jquery used to store user input
 $(".saveBtn").on("click", function () {
-  //get nearby values.
+  //pull nearby values.
   console.log(this);
   var text = $(this).siblings(".description").val();
   var time = $(this).parent().attr("id");
@@ -217,15 +217,15 @@ $(".saveBtn").on("click", function () {
 
 //saves the input even after reloading page
 //passing in key value pair (like get element by ID)
-$("#hour-9, description").val(localStorage.getItem("hour-9"));
-$("#hour-10, description").val(localStorage.getItem("hour-10"));
-$("#hour-11, description").val(localStorage.getItem("hour-11"));
-$("#hour-12, description").val(localStorage.getItem("hour-12"));
-$("#hour-13, description").val(localStorage.getItem("hour-13"));
-$("#hour-14, description").val(localStorage.getItem("hour-14"));
-$("#hour-15, description").val(localStorage.getItem("hour-15"));
-$("#hour-16, description").val(localStorage.getItem("hour-16"));
-$("#hour-17, description").val(localStorage.getItem("hour-17"));
+$("#hour-9 .description").val(localStorage.getItem("hour-9"));
+$("#hour-10 .description").val(localStorage.getItem("hour-10"));
+$("#hour-11 .description").val(localStorage.getItem("hour-11"));
+$("#hour-12 .description").val(localStorage.getItem("hour-12"));
+$("#hour-13 .description").val(localStorage.getItem("hour-13"));
+$("#hour-14 .description").val(localStorage.getItem("hour-14"));
+$("#hour-15 .description").val(localStorage.getItem("hour-15"));
+$("#hour-16 .description").val(localStorage.getItem("hour-16"));
+$("#hour-17 .description").val(localStorage.getItem("hour-17"));
 
 var saveButton = document.querySelectorAll(".saveBtn");
 var descriptionText = document.querySelector(".description");
