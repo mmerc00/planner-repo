@@ -45,85 +45,103 @@
 //TODO: as soon as i open my page get document on ready
 
 //DPENDENTS
-var currentDay = document.querySelector("currentDay");
+// var currentDay = document.querySelector("#currentDay");
+var date = moment().format("M/D/YYYY");
+var now = moment().format("H");
 
-$(document).ready(function () {
-  console.log("ready");
-});
+$(document).ready(init);
+
+function init() {
+  $("#currentDay").text(date);
+  $(".time-block").each(buildRow);
+  $(".saveBtn").click(saveBtn);
+}
+
+function buildRow() {
+  var time = $(this).attr("data-hour");
+  time = parseInt(time);
+
+  if (now === time) {
+    $(this).addClass("present");
+  }
+  if (now > time) {
+    $(this).addClass("past");
+  }
+  if (now < time) {
+    $(this).addClass("future");
+  }
+
+  var selector = "#hour-" + time + " .description";
+  var storageKey = "hour-" + time;
+  var storageValue = localStorage.getItem(storageKey);
+
+  $(selector).val(storageValue);
+}
+function saveBtn() {
+  //pull nearby values.
+  var text = $(this).siblings(".description").val();
+  var time = $(this).parent().attr("id");
+
+  //set items in local storage as a key value pair
+  localStorage.setItem(time, text);
+}
+
 // TO GET THE CURRENT DATE - find a way to display the day of the week
 //found online
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, "0");
-var mm = String(today.getMonth() + 1).padStart(2, "0");
-//January is 0!
-var yyyy = today.getFullYear();
-today = mm + "/" + dd + "/" + yyyy;
-currentDay.textContent = today;
+// var today = new Date();
+// var dd = String(today.getDate()).padStart(2, "0");
+// var mm = String(today.getMonth() + 1).padStart(2, "0");
+// //January is 0!
+// var yyyy = today.getFullYear();
+// today = mm + "/" + dd + "/" + yyyy;
+// currentDay.textContent = today;
 
 // TO GET CURRENT TIME - DONE
 // gets the current of the user when are on the website
 
-function myHour() {
-  var d = new Date();
-  var n = d.getHours();
-  return parseInt(n);
-}
-console.log(myHour());
+// function myHour() {
+//   var d = new Date();
+//   var n = d.getHours();
+//   return parseInt(n);
+// }
+// console.log(myHour());
 
 //TODO: generate the div - create 9 sub divs
 //in each sub div display time on the left, input area in the middle, submit button the the right
 //depending on the time of the day, it will diplay differently
 //array of time objects
-var time = [
-  00,
-  01,
-  02,
-  03,
-  04,
-  05,
-  06,
-  07,
-  08,
-  09,
-  10,
-  11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  17,
-  18,
-  19,
-  20,
-  21,
-  22,
-  23,
-  24,
-];
-console.log(time);
+
+// var time = [
+//   00,
+//   01,
+//   02,
+//   03,
+//   04,
+//   05,
+//   06,
+//   07,
+//   08,
+//   09,
+//   10,
+//   11,
+//   12,
+//   13,
+//   14,
+//   15,
+//   16,
+//   17,
+//   18,
+//   19,
+//   20,
+//   21,
+//   22,
+//   23,
+//   24,
+// ];
+// console.log(time);
 
 //loop time (each)
 //selects EVERY time block then === saves it to a bx
-$(".time-block").each(function () {
-  console.log(this);
-  var timeRow = $(this);
-  var now = myHour();
-  var time = parseInt(timeRow.attr("id").split("-")[1]);
-  console.log(time);
-  if (now === time) {
-    $(this).addClass("present");
-    //if time.key === myHour, then block is red
-  }
-  if (now > time) {
-    $(this).addClass("past");
-    //if time.key < myHour, then block is grey
-  }
-  if (now < time) {
-    $(this).addClass("future");
-    // if time.key> if time.key < myHour, then block is green
-  }
-});
 
 //time row eqauls this $(this)===setting variable
 
@@ -141,13 +159,13 @@ $(".time-block").each(function () {
     if (myHour() > time[i]) {
       // if time.key> if time.key < myHour, then block is green
     }function colorBlock() {
-    //     if (myHour < 09 || myHour > 17){
+      //     if (myHour < 09 || myHour > 17){
     // //turn  all the divs to yellow
- */
+    */
 // Render a new li for e */ach todo
 /* 
-    for (var i = 0; i < scheduleItems.length; i++) {
-        var item = scheduleItems[i];
+for (var i = 0; i < scheduleItems.length; i++) {
+  var item = scheduleItems[i];
         var hour = scheduleItems[i];
         var li = document.createElement(“li”);
         li.textContent = todo;
@@ -155,8 +173,8 @@ $(".time-block").each(function () {
         var button = document.createElement(“button”);
         button.textContent = “Complete”;
         li.appendChild(button);
-     todoList.appendChild(li);
-  }
+        todoList.appendChild(li);
+      }
  */
 //CREATE FUNCTION THAT PUSHES WHATEVER IS TYPED INTO AN ARRAY
 //scheduleItems = [{hour and user input//}]
@@ -186,48 +204,40 @@ $(".time-block").each(function () {
 //var tasks [];
 
 //jquery used to store user input
-$(".saveBtn").on("click", function () {
-  //pull nearby values.
-  console.log(this);
-  var text = $(this).siblings(".description").val();
-  var time = $(this).parent().attr("id");
-  //set items in local storage as a key value pair
-  localStorage.setItem(time, text);
-});
 
 //saves the input even after reloading page
 //passing in key value pair (like get element by ID)
-$("#hour-9 .description").val(localStorage.getItem("hour-9"));
-$("#hour-10 .description").val(localStorage.getItem("hour-10"));
-$("#hour-11 .description").val(localStorage.getItem("hour-11"));
-$("#hour-12 .description").val(localStorage.getItem("hour-12"));
-$("#hour-13 .description").val(localStorage.getItem("hour-13"));
-$("#hour-14 .description").val(localStorage.getItem("hour-14"));
-$("#hour-15 .description").val(localStorage.getItem("hour-15"));
-$("#hour-16 .description").val(localStorage.getItem("hour-16"));
-$("#hour-17 .description").val(localStorage.getItem("hour-17"));
+// $("#hour-9 .description").val(localStorage.getItem("hour-9"));
+// $("#hour-10 .description").val(localStorage.getItem("hour-10"));
+// $("#hour-11 .description").val(localStorage.getItem("hour-11"));
+// $("#hour-12 .description").val(localStorage.getItem("hour-12"));
+// $("#hour-13 .description").val(localStorage.getItem("hour-13"));
+// $("#hour-14 .description").val(localStorage.getItem("hour-14"));
+// $("#hour-15 .description").val(localStorage.getItem("hour-15"));
+// $("#hour-16 .description").val(localStorage.getItem("hour-16"));
+// $("#hour-17 .description").val(localStorage.getItem("hour-17"));
 
 //more variables
-var saveButton = document.querySelectorAll(".saveBtn");
-var descriptionText = document.querySelector(".description");
 
-var saveButton = document.querySelectorAll(".saveBtn");
-var descriptionText = document.querySelector(".description");
+// $(".saveBtn").click(function () {
+//   console.log("Button was clicked.");
+//   // var divHour = event.target.parentNode.getAttribute("id");
+//   var divHour = $(this).parent().attr("id");
+//   //  description = descriptionText.value.trim();
+//   var description = $(this).parent().find(".description").val().trim();
+//   console.log(divHour);
+//   console.log(description);
 
-for (let i = 0; i < saveButton.length; i++) {
-  saveButton[i].addEventListener("click", function () {
-    console.log("Button was clicked.");
-    var divHour = event.target.parentNode.getAttribute("id");
-    var description = descriptionText.value.trim();
-    console.log(divHour);
-    console.log(description);
-    storeTasks(divHour, description);
-  });
-}
+//   // storeTasks(divHour, description);
+// });
+
+// for (let i = 0; i < saveButton.length; i++) {
+//   saveButton[i].addEventListener("click", );
+// }
 //trim method trims user input
 /* 
  var userinputByHour = [{
-    divHour:"",
+   divHour:"",
 }] 
 
 userInputByHour.push
@@ -244,9 +254,9 @@ if (description ==="") {
 // time to retrieve that ls
 
 /* function init() {
-//     // Write code here to check if there are todos in localStorage
+  //     // Write code here to check if there are todos in localStorage
 //     // If so, parse the value from localStorage and assign it to the todos variable
-   todos = JSON.parse(localStorage.getItem(“todos”)) || []; <<- short circuit operator
+todos = JSON.parse(localStorage.getItem(“todos”)) || []; <<- short circuit operator
 //     // Render todos to the DOM
-   renderTodos();
+renderTodos();
 // } */
