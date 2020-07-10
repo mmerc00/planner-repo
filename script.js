@@ -58,7 +58,7 @@ var mm = String(today.getMonth() + 1).padStart(2, "0");
 //January is 0!
 var yyyy = today.getFullYear();
 today = mm + "/" + dd + "/" + yyyy;
-currentDay.append(today);
+currentDay.textContent = today;
 
 // TO GET CURRENT TIME - DONE
 // gets the current of the user when are on the website
@@ -103,9 +103,8 @@ var time = [
 ];
 console.log(time);
 
-//each is a for loop
-//what does this refer to
-//going through the blocks to determine the color
+//loop time (each)
+//selects EVERY time block then === saves it to a bx
 $(".time-block").each(function () {
   console.log(this);
   var timeRow = $(this);
@@ -144,26 +143,7 @@ $(".time-block").each(function () {
     }function colorBlock() {
     //     if (myHour < 09 || myHour > 17){
     // //turn  all the divs to yellow
-  
-} */
-// TODO: work on coloring the blocks with the for loop
-//Code from assignement 28
-// input - creates a pink banner on the page of the assignmeent after typing text in a text box above that once you press enter it will create a list item
-// the list item will be that pink banner with the text inside that was typed and will be saved to localstorage and have a complete button
-//the complete button targets the element via atrributes that we add and when pressed will remove the li item/pink banner and text
-//We instead would like the banner when clicked, activate into a text area, which will allow the user to type in text
-//which/*  wil be saved once the user presses the button on the side
-//LOCALSTORAGE if a local storage info is null set object to empty string
-//var userInputByHour = [];
-//
-//have to id to each block
-//var textarea = document.getElementById  ("#textArea")
-//function renderTodos() {
-// Clear todoList element and update todoCountSpan
-//empty string to accept string
-//    textarea.innerHTML = "";
-//   todoCountSpan.textContent = todos.length;
-
+ */
 // Render a new li for e */ach todo
 /* 
     for (var i = 0; i < scheduleItems.length; i++) {
@@ -227,6 +207,7 @@ $("#hour-15 .description").val(localStorage.getItem("hour-15"));
 $("#hour-16 .description").val(localStorage.getItem("hour-16"));
 $("#hour-17 .description").val(localStorage.getItem("hour-17"));
 
+//more variables
 var saveButton = document.querySelectorAll(".saveBtn");
 var descriptionText = document.querySelector(".description");
 
@@ -253,7 +234,6 @@ userInputByHour.push
 todoInput.value ="";
 renderTasks();
 }
-
 
 
 function storeTasks (){
