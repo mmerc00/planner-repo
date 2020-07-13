@@ -1,6 +1,6 @@
 <img src="assets/screenshotPR.png">
 
--Collaborated with Tiffany Lombardi, Michael Habert, James Kim, Nathan Paecchi and Cammeryne Sullivan
+-Collaborated with classmats to present this planner
 
 -we first added blocks to the HTML with the help of Michael
 
